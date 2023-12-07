@@ -1,6 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:my_project/screens/payment.dart';
 import 'package:my_project/utils/app_styles.dart';
 import 'package:my_project/widgets/column_layout.dart';
 import 'package:my_project/widgets/layout_builder_widget.dart';
@@ -260,7 +261,16 @@ class ProfileScreen extends StatelessWidget {
           ),
           Gap(25),
           InkWell(
-            onTap: () => print("You are tapped"),
+           onTap: () {
+      // // Navigate to the OpenHotelScreen page
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => Payment(),
+      //   ),
+      // );
+    },
+    
             child: Center(
               child: Text(
                 "How to get more miles",
@@ -270,7 +280,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          
         ],
       ),
     );

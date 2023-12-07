@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/screens/chosehotel_screen.dart';
+import 'package:my_project/screens/search_screen.dart';
 import 'package:my_project/utils/app_layout.dart';
 
 class AppTicketTabs extends StatelessWidget {
@@ -26,19 +28,46 @@ class AppTicketTabs extends StatelessWidget {
               borderRadius: BorderRadius.horizontal(left:Radius.circular(50)),
               color: Colors.white,
                   ),
-                  child:Center(child: Text(firstTab)),
+                  // child:Center(child: Text(firstTab)),
+                   child: InkWell(
+    // onTap: () {
+    //   // Navigate to the OpenHotelScreen page
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => SearchScreen(),
+    //     ),
+    //   );
+    // },
+    child: Center(
+      child: Text(firstTab),
+    ),
+  ),
                 ),
 
                 //hotels
                 Container(
-                  width: size.width*.44,
-                  padding: EdgeInsets.symmetric(vertical:7 ),
-                  decoration: BoxDecoration(
-              borderRadius: BorderRadius.horizontal(right:Radius.circular(50)),
-              color: Colors.transparent,
-                  ),
-                  child:Center(child: Text(secondTab)),
-                ),
+  width: size.width * 0.44,
+  padding: EdgeInsets.symmetric(vertical: 7),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.horizontal(right: Radius.circular(50)),
+    color: Colors.transparent,
+  ),
+  child: InkWell(
+    // onTap: () {
+    //   // Navigate to the OpenHotelScreen page
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => OpenHotelScreen(),
+    //     ),
+    //   );
+    // },
+    child: Center(
+      child: Text(secondTab),
+    ),
+  ),
+),
                 
               ],
             ),

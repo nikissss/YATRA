@@ -1,14 +1,43 @@
+import 'package:country_picker/country_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
+import 'package:my_project/screens/chosehotel_screen.dart';
+import 'package:my_project/screens/payment.dart';
 import 'package:my_project/utils/app_layout.dart';
 import 'package:my_project/utils/app_styles.dart';
 import 'package:my_project/widgets/double_text_widget.dart';
 import 'package:my_project/widgets/icon_text_widget.dart';
 import 'package:my_project/widgets/ticket_tabs.dart';
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+class SearchScreen extends StatefulWidget {
+   const SearchScreen({super.key});
+  
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
 
+class _SearchScreenState extends State<SearchScreen> {
+  //create datetime variable
+  DateTime _dateTime = DateTime.now();
+  //show date picker method
+void _showDatePicker(){
+  showDatePicker(
+    context: context, 
+    initialDate: DateTime.now(), 
+    firstDate: DateTime(2023,12,6),//DateTime(2023), 
+    lastDate: DateTime(2024)
+    ).then((value) {
+      setState(() {
+        _dateTime = value!;
+      });
+    });
+}
+int _selectedAdultValue=0;
+int _selectedChildValue =0;
+String countryCode="";
+String countryCode1="";
   @override
   Widget build(BuildContext context) {
     final size=AppLayout.getSize(context);
@@ -20,13 +49,233 @@ class SearchScreen extends StatelessWidget {
           const Gap(40),
           Text("What are\nyou looking for?",style: Styles.headlineStyle1.copyWith(fontSize: 35)),
           const Gap(40),
-          const AppTicketTabs(firstTab: "Airline Tickets", secondTab: "Hotels",)
+          const AppTicketTabs(firstTab: "Airline Tickets", secondTab: "Hotels",),
+
+          const Gap(20),
+          const AppTicketTabs(firstTab: "Two-way ticket", secondTab: "One-way ticket",)
         ,
-        const Gap(25),
-        AppIconText(icon: Icons.flight_takeoff_rounded, text: "Departure"),
+        const Gap(10),
+        Container(
+  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: Colors.white,
+  ),
+  child: Row(
+    children: [
+      
+      
+      Row(
+        children: [
+          
+          Icon(Icons.flight_takeoff_rounded, color: Color(0xFFBFC2DF)),
+      // const Gap(10), 
+          //button
+          TextButton(
+            onPressed: (){
+              showCountryPicker(
+                context: context, 
+                countryListTheme: CountryListThemeData(
+                  inputDecoration: InputDecoration(
+                    hintText: "Type your destination",
+                    labelText: "Search"
+                  )
+                ),
+                onSelect: (Country value){
+                  countryCode = value.name.toString();
+                  setState(() {
+                    
+                  });
+                }
+                );
+            }, 
+            child: Text(countryCode.toString())
+            ),
+          
+          const Gap(130),
+            Icon(Icons.flight_land_rounded, color: Color(0xFFBFC2DF)),
+            TextButton(
+            onPressed: (){
+              showCountryPicker(
+                context: context, 
+                countryListTheme: CountryListThemeData(
+                  inputDecoration: InputDecoration(
+                    hintText: "Type your destination",
+                    labelText: "Search"
+                  )
+                ),
+                onSelect: (Country value){
+                  countryCode1 = value.name.toString();
+                  setState(() {
+                    
+                  });
+                }
+                );
+            }, 
+            child: Text(countryCode1.toString())
+            ),
+          
+        ],
+      ),
+    ],
+  ),
+),
+        const Gap(10),
+        // AppIconText(icon: Icons.flight_takeoff_rounded, text: "Departure",),
+        Container(
+  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: Colors.white,
+  ),
+  child: Row(
+    children: [
+      
+      Icon(Icons.flight_takeoff_rounded, color: Color(0xFFBFC2DF)),
+      const Gap(10),
+      Text("Departure", style: Styles.textStyle),
+      const Gap(30),  // Add a gap or SizedBox as needed
+      Row(
+        children: [
+          //display chosen date
+          // Text(_dateTime.month.toString()),
+          Text(DateFormat('yyyy-MM-dd').format(_dateTime)),
+          const Gap(17),
+          //button
+          MaterialButton(
+            onPressed: _showDatePicker,
+            child: Padding(
+              padding: EdgeInsets.all(6.0),
+            child: Text("Choose date"),
+          )
+          ),
+        ],
+      ),
+    ],
+  ),
+),
+
         const Gap(15),
-        AppIconText(icon: Icons.flight_land_rounded, text: "Arrival"),
+        //AppIconText(icon: Icons.flight_land_rounded, text: "Arrival"),
+         Container(
+  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: Colors.white,
+  ),
+  child: Row(
+    children: [
+      Icon(Icons.flight_land_rounded, color: Color(0xFFBFC2DF)),
+      const Gap(10),
+      Text("Arrival", style: Styles.textStyle),
+      const Gap(55),  // Add a gap or SizedBox as needed
+      Row(
+        children: [
+          //display chosen date
+          // Text(_dateTime.toString()),
+          Text(DateFormat('yyyy-MM-dd').format(_dateTime)),
+          const Gap(17),
+          //button
+          MaterialButton(
+            onPressed: _showDatePicker,
+            child: Padding(
+              padding: EdgeInsets.all(6.0),
+            child: Text("Choose date"),
+          )
+          ),
+        ],
+      ),
+    ],
+  ),
+),
         const Gap(15),
+       // AppIconText(icon:Icons.people_alt_rounded, text:"No. of people"),
+        Container(
+  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: Colors.white,
+  ),
+  child: Row(
+    children: [
+      Icon(Icons.people_alt_rounded, color: Color(0xFFBFC2DF)),
+      const Gap(10),
+      Text("No. of people", style: Styles.textStyle),
+      const Gap(30),  
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CupertinoButton.filled(
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+            child: Text("Adult = $_selectedAdultValue"), 
+            onPressed: () => showCupertinoModalPopup(
+              context: context, 
+              builder: (_) => SizedBox(
+                width: double.infinity,
+                height:250,
+                child: CupertinoPicker(
+                  backgroundColor: Colors.white,
+                  itemExtent: 30,
+                  scrollController:FixedExtentScrollController(
+                    initialItem: 0,
+                    ),
+                    children: const[
+                      Text('0'),
+                      Text('1'),
+                      Text('2'),
+                      Text('3'),
+                      Text('4'),
+                      Text('5'),
+                    ],
+                    onSelectedItemChanged: (int value) {
+                      setState(() {
+                        _selectedAdultValue= value;
+                      });
+                    },
+                ),
+              ),
+            ),
+              ),
+              const Gap(5),
+              CupertinoButton.filled(
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+            child: Text("Children = $_selectedChildValue"), 
+            onPressed: () => showCupertinoModalPopup(
+              context: context, 
+              builder: (_) => SizedBox(
+                width: double.infinity,
+                height:250,
+                child: CupertinoPicker(
+                  backgroundColor: Colors.white,
+                  itemExtent: 30,
+                  scrollController:FixedExtentScrollController(
+                    initialItem: 0,
+                    ),
+                    children: const[
+                      Text('0'),
+                      Text('1'),
+                      Text('2'),
+                      Text('3'),
+                      Text('4'),
+                      Text('5'),
+                    ],
+                    onSelectedItemChanged: (int value1) {
+                      setState(() {
+                        _selectedChildValue= value1;
+                      });
+                    },
+                ),
+              ),
+            ),
+              ),
+        ],
+      )
+    ],
+
+  ),
+),
+        const Gap(15),
+
         Container(
           padding: EdgeInsets.symmetric(vertical: 12, horizontal:12),
           decoration: BoxDecoration(
@@ -44,7 +293,30 @@ class SearchScreen extends StatelessWidget {
           )
         )
         ,
-        const Gap(40),
+        const Gap(20),
+        InkWell(
+           onTap: () {
+      // Navigate to the Payment page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Payment(),
+        ),
+      );
+    },
+            child: Center(
+              child: Text(
+                "Proceed with payment",
+                style: Styles.textStyle.copyWith(
+                  color: Styles.primarycolor,
+                  fontWeight: FontWeight.w500
+                ),
+              ),
+            ),
+          ),
+          const Gap(40),
+       
+
         AppDoubleTextWidget(BixText: "Upcoming Flights", SmallText: "View All"),
         const Gap(15),
         Row(

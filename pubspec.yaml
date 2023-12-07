@@ -39,6 +39,9 @@ dependencies:
   get:
   gap : ^3.0.1
   barcode_widget: ^2.0.4
+  khalti_flutter: ^2.2.1
+  intl: ^0.17.0
+  country_picker: ^2.0.23
 
 dev_dependencies:
   flutter_test:
