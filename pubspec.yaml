@@ -42,6 +42,9 @@ dependencies:
   khalti_flutter: ^2.2.1
   intl: ^0.17.0
   country_picker: ^2.0.23
+  csc_picker: ^0.2.7
+  latlng : ^1.0.0
+  animated_splash_screen: ^1.3.0
 
 dev_dependencies:
   flutter_test:

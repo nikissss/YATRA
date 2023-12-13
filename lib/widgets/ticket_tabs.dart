@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_project/screens/chosehotel_screen.dart';
-import 'package:my_project/screens/search_screen.dart';
+import 'package:my_project/screens/one_way_ticket.dart';
+//import 'package:my_project/screens/profile_screen.dart';
+//import 'package:my_project/screens/search_screen.dart';
 import 'package:my_project/utils/app_layout.dart';
 
 class AppTicketTabs extends StatelessWidget {
   final String firstTab;
   final String secondTab;
-  const AppTicketTabs({Key? key,required this.firstTab, required this.secondTab}) : super(key: key);
+  const AppTicketTabs({Key? key, required this.firstTab, this.secondTab=""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +31,15 @@ class AppTicketTabs extends StatelessWidget {
                   ),
                   // child:Center(child: Text(firstTab)),
                    child: InkWell(
-    // onTap: () {
-    //   // Navigate to the OpenHotelScreen page
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => SearchScreen(),
-    //     ),
-    //   );
-    // },
+    onTap: () {
+      // Navigate to the OpenHotelScreen page
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => OpenHotelScreen(),
+      //   ),
+      // );
+    },
     child: Center(
       child: Text(firstTab),
     ),
@@ -54,15 +55,15 @@ class AppTicketTabs extends StatelessWidget {
     color: Colors.transparent,
   ),
   child: InkWell(
-    // onTap: () {
-    //   // Navigate to the OpenHotelScreen page
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => OpenHotelScreen(),
-    //     ),
-    //   );
-    // },
+    onTap: () {
+      // Navigate to the OpenHotelScreen page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OneWayTicket(),
+        ),
+      );
+    },
     child: Center(
       child: Text(secondTab),
     ),

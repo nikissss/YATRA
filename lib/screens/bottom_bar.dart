@@ -1,6 +1,5 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:my_project/screens/chosehotel_screen.dart';
 import 'package:my_project/screens/home_screen.dart';
 import 'package:my_project/screens/profile_screen.dart';
 import 'package:my_project/screens/search_screen.dart';
@@ -52,11 +51,11 @@ class _BottomBarState extends State<BottomBar> {
         BottomNavigationBarItem(icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
         activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
         label: "Home"),
-        BottomNavigationBarItem(icon: Icon(FluentSystemIcons.ic_fluent_search_regular),
-        activeIcon: Icon(FluentSystemIcons.ic_fluent_search_filled),
+        BottomNavigationBarItem(icon: Icon(FluentSystemIcons.ic_fluent_airplane_regular),
+        activeIcon: Icon(FluentSystemIcons.ic_fluent_airplane_filled),
         label: "Search"),
-        BottomNavigationBarItem(icon: Icon(FluentSystemIcons.ic_fluent_ticket_regular),
-        activeIcon: Icon(FluentSystemIcons.ic_fluent_ticket_filled),
+        BottomNavigationBarItem(icon: Icon(FluentSystemIcons.ic_fluent_building_regular),
+        activeIcon: Icon(FluentSystemIcons.ic_fluent_building_filled),
         label: "Tickets"),
         BottomNavigationBarItem(icon: Icon(FluentSystemIcons.ic_fluent_person_regular),
         activeIcon: Icon(FluentSystemIcons.ic_fluent_person_filled),

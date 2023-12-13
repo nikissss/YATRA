@@ -13,6 +13,10 @@ class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Proceed with payment"),
+        backgroundColor: Colors.blueGrey,
+      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.max,

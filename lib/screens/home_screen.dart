@@ -38,13 +38,13 @@ class HomeScreen extends StatelessWidget {
                     ),
                      Container(
                       height:50,
-                      width: 50,
+                      width: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: const DecorationImage(
                           fit: BoxFit.fitHeight,
                           image: AssetImage(
-                            "assets/images/img_1.png"
+                            "assets/images/logo.png"
                           )
                         )
                       )

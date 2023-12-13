@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:my_project/utils/dummy_data.dart';
+import 'package:my_project/utils/flight_model.dart';
+import 'package:my_project/widgets/FlightBlock.dart';
+
+class ListFlightScreen extends StatelessWidget {
+   final FlightModel? model;
+   ListFlightScreen({Key?key, this.model}) :super(key:key);
+  final DateFormat format = DateFormat("dd MMM");
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFFF5F5FA),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.blueGrey,
+        elevation: 0,
+        child: Container(
+          width: double.maxFinite,
+          height: AppBar().preferredSize.height,
+          child: Row(
+            children: [
+              Expanded(
+                child: ListTile(
+                  title:Text(
+                   format.format(DateTime.now()),
+                    style: TextStyle(color: Colors.black),
+                    ) ,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        elevation: 0,
+        title: Text("Flights"),
+        actions: [
+          IconButton(
+            onPressed: (){
+               if (model != null) {
+                // Example: Navigate to another screen using the passed model
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListFlightScreen(model: model),
+                  ),
+                );
+              }
+            },
+            icon: Image.asset(
+              "assets/images/paint.png"
+            ),
+             //icon: SvgPicture.asset("assets/images/paint.png"),
+             )
+        ],
+        ),
+        body: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          itemCount: flights.length,
+          itemBuilder: (_,index){
+            return Container
+            (
+              padding:EdgeInsets.only(bottom: 20) ,
+              child:FlightBlock(model:flights[index]));
+          }),
+    );
+  }
+}
+

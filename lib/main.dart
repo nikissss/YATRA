@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'package:my_project/screens/bottom_bar.dart';
@@ -23,7 +24,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData( 
         primaryColor: primary,
       ),
-      home: const BottomBar(),
+      home:  AnimatedSplashScreen(
+        splash:  Transform.scale(
+    scale: 3.0, // Adjust the scale factor as needed
+    child: Image.asset('assets/images/yatra.png'),
+  ),
+        //Image.asset('assets/images/yatra.png'),
+        duration: 2000,
+        splashTransition: SplashTransition.rotationTransition,
+        backgroundColor: Colors.grey, 
+        nextScreen: BottomBar(),
+        ),
       navigatorKey: navkey,
       localizationsDelegates: const [
         KhaltiLocalizations.delegate
