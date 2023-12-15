@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:my_project/screens/list_flight_screen.dart';
 import 'package:my_project/utils/app_layout.dart';
 import 'package:my_project/utils/app_styles.dart';
+import 'package:my_project/utils/dummy_data.dart';
+import 'package:my_project/utils/flight_model.dart';
 import 'package:my_project/widgets/double_text_widget.dart';
 import 'package:my_project/widgets/ticket_tabs.dart';
 
@@ -20,6 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   //create datetime variable
   DateTime _departureDate = DateTime.now();
   DateTime _arrivalDate = DateTime.now();
+  
   //show date picker method
 void _showDatePicker(){
   showDatePicker(
@@ -49,6 +52,16 @@ int _selectedAdultValue=0;
 int _selectedChildValue =0;
 String countryCode="";
 String countryCode1="";
+String selectedOptions = "";
+late String d_country;
+  late String a_country;
+
+void updateSelectedOptions() {
+    setState(() {
+      selectedOptions =
+          "From: $countryCode\nTo: $countryCode1\nDeparture Date: ${DateFormat('yyyy-MM-dd').format(_departureDate)}\n Arrival Date: ${DateFormat('yyyy-MM-dd').format(_arrivalDate)}\nAdults: $_selectedAdultValue\nChildren: $_selectedChildValue";
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final size=AppLayout.getSize(context);
@@ -336,44 +349,26 @@ String countryCode1="";
           child: ElevatedButton(
             onPressed: () 
             {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context)=> ListFlightScreen(),
-               
-              ),
+              updateSelectedOptions();
+            Navigator.push(
+            context,
+             MaterialPageRoute(
+             builder: (context) => ListFlightScreen(selectedOptions: selectedOptions),
+             ),
               );
+              updateFlightList();
             }, 
             child: Container(
               child: Text("Find Ticket"),
             ),
             ),
         ),
-        // ,
-        // const Gap(20),
-    //     InkWell(
-    //        onTap: () {
-    //   // Navigate to the Payment page
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => Payment(),
-    //     ),
-    //   );
-    // },
-    //         child: Center(
-    //           child: Text(
-    //             "Proceed with payment",
-    //             style: Styles.textStyle.copyWith(
-    //               color: Styles.primarycolor,
-    //               fontWeight: FontWeight.w500
-    //             ),
-    //           ),
-    //         ),
-    //       ),
+        const Gap(10),
+          Text(selectedOptions, style: Styles.headlineStyle1.copyWith(fontSize: 20),),
           const Gap(40),
-       
 
+       
+        //articles
         AppDoubleTextWidget(BixText: "More Information", SmallText: "View All"),
         const Gap(15),
         Row(
@@ -493,5 +488,50 @@ String countryCode1="";
         ],
       ),
     );
+  }
+  void updateFlightList() {
+    // Only update the flight list if both departure and arrival countries are selected
+    if (countryCode.isNotEmpty && countryCode1.isNotEmpty) {
+
+      // Trigger a rebuild to reflect the updated list
+      setState(() {
+          flights = getFlights(countryCode, countryCode1);
+          print("Updating flights with departure: $countryCode, arrival: $countryCode1");
+
+      });
+    }
+  }
+// void updateFlightList() {
+//     // Only update the flight list if either departure or arrival countries change
+   
+//       flights = getFlights(countryCode, countryCode1);
+
+//       // Update previous values
+//       previousDepartureCountry = countryCode;
+//       previousArrivalCountry = countryCode1;
+
+//       // Trigger a rebuild to reflect the updated list
+//       setState(() {});
+    
+//   }
+
+  List<FlightModel> getFlights(String departureCountry, String arrivalCountry) {
+    // Filter flights based on selected departure and arrival countries
+    print("equal cha ki chaina check gareko");
+    return flights.where((flight) =>
+        flight.d_country == departureCountry && flight.a_country == arrivalCountry).toList();
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("didchangedependencies called");
+    // Call updateFlightList when the route changes
+    updateFlightList();
+  }
+  
+  void didPopNext() {
+    print("didPopNext called");
+    // Call updateFlightList when the route is popped (user navigates back)
+    updateFlightList();
   }
 }

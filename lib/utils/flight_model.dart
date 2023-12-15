@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:latlng/latlng.dart';
 
@@ -9,7 +10,9 @@ class FlightModel {
   final String price;
   final LatLng coordinates;
   final List<String> facilities;
-  final String fullAddress; 
+  final String fullAddress;
+  final String d_country;
+  final String a_country; 
   final List<String> Refund;
   FlightModel({
     required this.id,
@@ -17,17 +20,17 @@ class FlightModel {
     required this.price,
     this.coordinates = const LatLng(27.7209922,85.3330453),
     this.facilities = const [
-      "Safety"
+      "Friendly"
     ],
     this.fullAddress="Kathmandu",
+    required this.d_country,
+    required this.a_country,
     this.Refund= const[
       "Non-refundable",
       "Refundable",
       "Refundable",
       "Refundable",
-
-     ],
-    
+    ]
   });
 
   FlightModel copyWith({
@@ -37,6 +40,8 @@ class FlightModel {
     LatLng? coordinates,
     List<String>? facilities,
     String? fullAddress,
+    String? d_country,
+    String? a_country,
     List<String>? Refund,
   }) {
     return FlightModel(
@@ -46,6 +51,8 @@ class FlightModel {
       coordinates: coordinates ?? this.coordinates,
       facilities: facilities ?? this.facilities,
       fullAddress: fullAddress ?? this.fullAddress,
+      d_country: d_country ?? this.d_country,
+      a_country: a_country ?? this.a_country,
       Refund: Refund ?? this.Refund,
     );
   }
@@ -58,12 +65,23 @@ class FlightModel {
       'coordinates': coordinates,
       'facilities': facilities,
       'fullAddress': fullAddress,
+      'd_country': d_country,
+      'a_country': a_country,
       'Refund': Refund,
     };
   }
 
   factory FlightModel.fromMap(Map<String, dynamic> map) {
     return FlightModel(
+      // id: map['id'] as String,
+      // name: map['name'] as String,
+      // price: map['price'] as String,
+      // coordinates: map['coordinates'],
+      // facilities: List<String>.from((map['facilities'] as List<String>),
+      // fullAddress: map['fullAddress'] as String,
+      // Refund: List<String>.from((map['Refund'] as List<String>),
+      // d_country: map['d_country'] as String,
+      // a_country: map['a_country'] as String,
       id: map['id'] as String,
       name: map['name'] as String,
       price: map['price'] as String,
@@ -71,6 +89,8 @@ class FlightModel {
       facilities: List<String>.from((map['facilities'] as List<String>)),
       fullAddress: map['fullAddress'] as String,
       Refund: List<String>.from((map['Refund'] as List<String>)),
+      d_country: map['d_country'] as String,
+      a_country: map['a_country'] as String,
     );
   }
 
@@ -80,7 +100,7 @@ class FlightModel {
 
   @override
   String toString() {
-    return 'FlightModel(id: $id, name: $name, price: $price, coordinates: $coordinates, facilities: $facilities, fullAddress: $fullAddress, Refund: $Refund)';
+    return 'FlightModel(id: $id, name: $name, price: $price, coordinates: $coordinates, facilities: $facilities, fullAddress: $fullAddress, d_country: $d_country, a_country: $a_country, Refund: $Refund)';
   }
 
   @override
@@ -94,6 +114,8 @@ class FlightModel {
       other.coordinates == coordinates &&
       listEquals(other.facilities, facilities) &&
       other.fullAddress == fullAddress &&
+      other.d_country == d_country &&
+      other.a_country == a_country &&
       listEquals(other.Refund, Refund);
   }
 
@@ -105,6 +127,8 @@ class FlightModel {
       coordinates.hashCode ^
       facilities.hashCode ^
       fullAddress.hashCode ^
+      d_country.hashCode ^
+      a_country.hashCode ^
       Refund.hashCode;
   }
 }

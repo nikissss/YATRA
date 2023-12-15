@@ -4,9 +4,11 @@ import 'package:my_project/utils/dummy_data.dart';
 import 'package:my_project/utils/flight_model.dart';
 import 'package:my_project/widgets/FlightBlock.dart';
 
+
 class ListFlightScreen extends StatelessWidget {
    final FlightModel? model;
-   ListFlightScreen({Key?key, this.model}) :super(key:key);
+   final String selectedOptions;
+   ListFlightScreen({Key?key, this.model, required  this.selectedOptions}) :super(key:key);
   final DateFormat format = DateFormat("dd MMM");
   @override
   Widget build(BuildContext context) {
@@ -41,12 +43,14 @@ class ListFlightScreen extends StatelessWidget {
             onPressed: (){
                if (model != null) {
                 // Example: Navigate to another screen using the passed model
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ListFlightScreen(model: model),
-                  ),
-                );
+             var selectedOptions;
+             Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => ListFlightScreen(selectedOptions: selectedOptions),
+  ),
+);
+
               }
             },
             icon: Image.asset(
